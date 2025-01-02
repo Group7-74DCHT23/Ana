@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.sidebar {
+    position: fixed; /* Sidebar cố định bên trái */
+    top: 0;
+    left: 0;
+    height: 100%; /* Chiều cao toàn màn hình */
+    width: 250px; /* Độ rộng sidebar */
+    background-color: #f15e2c; /* Màu nền sidebar */
+    padding: 10px 0; /* Khoảng cách bên trong */
+    overflow-y: auto; /* Cuộn nếu nội dung dài */
+}
+
+.sidebar h1 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px; /* Khoảng cách dưới */
+    font-size: 24px; /* Kích thước chữ */
+    border-bottom: 2px solid #fff; /* Đường kẻ solid */
+    padding-bottom: 10px; /* Khoảng cách dưới chữ */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 0;
+    border-bottom: 1px dashed #fff; /* Dấu ngăn cách dashed */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar ul li:last-child {
+    border-bottom: none; /* Loại bỏ dấu ngăn cách cuối */
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #fff; /* Màu chữ */
+    display: flex;
+    align-items: center;
+    padding: 15px; /* Khoảng cách bên trong mỗi mục */
+}
+
+.sidebar ul li a i {
+    margin-right: 10px; /* Khoảng cách giữa biểu tượng và chữ */
+    font-size: 20px; /* Kích thước biểu tượng */
+}
+
+.sidebar ul li:hover {
+    background-color: #fff; /* Màu nền khi hover */
+}
+
+.sidebar ul li:hover a {
+    color: #f15e2c; /* Đổi màu chữ khi hover */
+}
+
+.main-content {
+    margin-left: 280px; /* Đẩy nội dung sang phải */
+    padding: 20px; /* Khoảng cách nội dung */
+}
+.container {
+    display: flex; /* Sử dụng flexbox để đặt logo và h3 cùng dòng */
+    gap: 10px; /* Khoảng cách giữa logo và h3 */
+}
+
+.container img {
+    width: 100px; /* Kích thước logo */
+}
+
+.container h3{
+    font-size: 18px; /* Kích thước chữ tiêu đề */
+    color: #f15e2c; /* Màu chữ (có thể thay đổi theo ý bạn) */
+    margin-left: auto; /* Đẩy h3 sang bên phải */
+
+}
+
+
+/* Phần banner */
+.banner {
+    width: 60%; /* Giới hạn chiều rộng của banner */
+    padding: 50px;
+    margin: 0 auto; /* Căn giữa ảnh */
+}
+
+.banner img {
+    width: 100%; /* Đảm bảo ảnh chiếm toàn bộ chiều rộng của phần banner */
+    height: auto; /* Giữ tỷ lệ ảnh */
+}
+
+/* Phần các box (đơn hàng, người dùng, hệ thống) */
+.info-boxes {
+    display: flex;
+    flex-direction: row; /* Sắp xếp các ô theo cột */
+    gap: 20px; /* Khoảng cách giữa các box */
+    padding: 30px;  
+    flex: 1; /* Các box chiếm phần không gian còn lại */
+    justify-content: center; /* Căn giữa các box theo chiều ngang */
+    align-items: center; /* Căn giữa các box theo chiều dọc */  
+}
+
+.box a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 20px; /* Giảm khoảng cách bên trong */
+    background-color: #2196F3;
+    border-radius: 5px;
+    color: white;
+    justify-content: space-between; /* Căn chỉnh biểu tượng và text */
+    width: 200px; /* Giới hạn chiều rộng của các box */
+}
+
+.box:nth-child(1) a {
+    background-color: #4CAF50; 
+}
+
+.box:nth-child(2) a {
+    background-color: #2196F3; 
+}
+
+.box:nth-child(3) a{
+    background-color: #F44336;
+}
+

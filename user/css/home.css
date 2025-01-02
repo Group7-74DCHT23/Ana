@@ -1,0 +1,448 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    font-family: "Nunito Sans", sans-serif;
+  }
+  .wrap {
+    width: 92%;
+    margin: 0 auto;
+  }
+  .inner-wrap {
+    width: 1208px;
+    margin: 0 auto;
+  }
+  li {
+    list-style: none;
+  }
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  img {
+    width: 100%;
+    display: inline-block;
+    width: auto;
+  }
+  h3 {
+    font-size: 28px;
+  }
+  
+  /* ===================menu=================== */
+  #menu {
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  .logo-ananas {
+    padding: 20px 0 20px 0;
+    margin-left: 164px;
+  }
+  .logo-ananas img {
+    vertical-align: middle;
+  }
+  #menu > ul {
+    display: flex;
+    padding-top: 50px;
+  }
+  #menu > ul > li:not(li:last-child) {
+    padding-top: 10px;
+  }
+  #menu > ul > li:not(li:last-child)::before {
+    content: "";
+    width: 2px;
+    height: 20px;
+    background-color: #999;
+    position: absolute;
+    right: 0;
+  }
+  #menu > ul > li {
+    font-size: 22px;
+    text-transform: uppercase;
+    padding: 0 20px;
+    color: black;
+    font-weight: bold;
+    font-family: "monospace";
+    position: relative;
+  }
+  #menu > ul > li > a {
+    position: relative;
+    padding-right: 20px;
+    font-family: "Nunito Sans", sans-serif;
+  }
+  
+  #menu > ul > li:hover > a {
+    color: #ff5f17;
+  }
+
+  #menu > ul > li:nth-child(1):hover .dropdown-product {
+    transition: all 0.4s ease-in-out;
+    display: block;
+  }
+  #menu > ul > li:nth-child(2):hover .dropdown-formen {
+    transition: all 0.4s ease-in-out;
+    display: block;
+  }
+  #menu > ul > li:nth-child(3):hover .dropdown-forwomen {
+    transition: all 0.4s ease-in-out;
+    display: block;
+  }
+  .header-search {
+    display: flex;
+    align-items: center;  /* Căn giữa các phần tử tìm kiếm, đăng nhập, giỏ hàng theo chiều dọc */
+    gap: 20px;  /* Khoảng cách giữa các phần tử */
+  }
+  
+  .header-search form {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 100%;
+  }
+  
+  .header-search form input {
+    height: 100%;
+    padding: 10px 10px 10px 35px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .header-search form img {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+  }
+  
+  .header-search_user > a,
+  .header-search_shop > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    background: #f15e2c;
+    cursor: pointer;
+    padding: 8px 12px;
+    color: #fff;
+    border-radius: 5px;
+    border: 1px solid #f15e2c;
+    height: 40px;  /* Chiều cao của các nút đăng nhập và giỏ hàng */
+  }
+  
+  
+  /* =====================dropdown product=========================== */
+  .dropdown-product {
+    background-color: #4c4c4c;
+    padding: 20px 40px;  
+    top: 100%;
+    left: -100%;
+    z-index: 3;
+    position: absolute;
+    display: none;
+    width: auto;
+  }
+  .dropdown-product::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    position: relative;
+    position: absolute;
+    z-index: 99;
+    top: -7px;
+    background: #4c4c4c;
+    margin-left: 250px;
+    transform: rotate(45deg);
+  }
+  .dropdown-product > a {
+    font-size: 18px;
+    color: #808080;
+    display: block;
+    text-align: center;
+  }
+  .dropdown-product > a > span {
+    color: #fff;
+  }
+  .menu-product {
+    padding-bottom: 30px;
+    /* background: green; */
+    display: flex;
+    justify-content: space-between;
+  }
+  .menu-product > div {
+    width: calc((100% - 120px) / 3);
+    padding-bottom: 30px;
+    text-align: center;
+    /* background: red; */
+    position: relative;
+    opacity: 0.5;
+    transition: all 0.3s ease-in;
+    cursor: pointer;
+  }
+  .menu-product > div:hover {
+    opacity: 1;
+  }
+  .menu-product > div > a {
+    font-weight: bolder;
+    color: #fff;
+    transition: all 0.1s ease-in;
+  }
+  .menu-product > div > a:hover {
+    color: #ff5f17;
+  }
+  .menu-product img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+ 
+  /* =====================================banner===================================== */
+  .banner {
+    width: 100%;
+    height: auto;
+  }
+  .banner > a {
+    width: 100%;
+    display: inline-block;
+  }
+  .banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* ==============================================main=========================================== */
+  /* #main {
+  } */
+  .banner-collection {
+    display: flex;
+    justify-content: space-between;
+    height: 600px;
+    padding: 70px 0;
+    flex-wrap: wrap;
+    /* background-color: red; */
+  }
+  .banner-collection h3 {
+    margin-top: 26px;
+    font-weight: bolder;
+    font-size: 26px;
+  }
+  .banner-collection p {
+    margin-top: 12px;
+    line-height: 24px;
+    font-size: 20px;
+  }
+  .banner-product,
+  .banner-sale {
+    width: 584px;
+    height: 320px;
+  }
+  .banner-collection img {
+    object-fit: cover;
+    width: 100%;
+    height: 320px;
+  }
+  
+  /* ===============================buying-list=================================== */
+  #nav-buying {
+    padding: 40px 0;
+  }
+  
+  #nav-buying > h3 {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .buying-list {
+    display: flex;
+    justify-content: space-between;
+    padding: 44px 0;
+    position: relative;
+  }
+  
+  .men-shoe,
+  .women-shoe,
+  .brand-product {
+    width: 396px;
+    height: 276px;
+    background-color: green;
+    text-align: center;
+    padding: 40px 16px;
+    position: relative;
+  }
+  
+  .men-shoe img,
+  .women-shoe img,
+  .brand-product img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Ảnh nằm dưới */
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Lớp màu tối */
+    z-index: 2; /* Đảm bảo lớp phủ nằm trên ảnh */
+  }
+  
+  .men-shoe h4,
+  .women-shoe h4,
+  .brand-product h4 {
+    position: relative;
+    z-index: 3; /* Tiêu đề nằm trên lớp phủ */
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin: 10px 0;
+  }
+  
+  .buying-list h4 {
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  
+  .buying-list h4 a,
+  .buying-list ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    word-spacing: 4px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    position: relative;
+    z-index: 4; /* Đảm bảo liên kết nằm trên lớp phủ và ảnh */
+  }
+  
+  .buying-list ul li a {
+    padding: 6px 0;
+    font-size: 18px;
+  }
+  
+  .buying-list ul li a:hover,
+  .buying-list h4 a:hover {
+    color: orange;
+  }
+  
+  .buying-list ul li a:active {
+    transform: scale(1.1);
+  }
+  
+  /* ===============================footer====================================== */
+  #footer {
+    padding: 66px 0 30px 0;
+    background-color: #4c4c4c;
+    display: flex;
+    color: #fff;
+  }
+  #footer h4,
+  #footer a {
+    color: #fff;
+  }
+  .find-store {
+    width: 26%;
+    height: auto;
+    text-align: center;
+  }
+  .infor-store {
+    width: 74%;
+  }
+  .row {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 30px;
+    padding-left: 50px;
+  }
+  .row:nth-child(3) {
+    align-items: center;
+    color: #808080;
+  }
+  .col {
+    width: 25%;
+  }
+  .col h4 {
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+  .find-store .logo-store {
+    margin-bottom: 40px;
+  }
+  .find-store a {
+    width: 279px;
+    font-size: 20px;
+    padding: 8px 56px;
+    font-weight: bold;
+    border: 1px solid #f15e2c;
+    background-color: #f15e2c;
+    text-align: center;
+  }
+  .col ul li {
+    margin-bottom: 10px;
+  }
+  .col ul > li > a {
+    color: #cccccc !important;
+  }
+
+  /* ====================================cards============================== */
+  #cards {
+    position: fixed;
+    right: 0;
+    top: 26%;
+    z-index: 2;
+  }
+  .shopping-cart {
+    background-color: #ff5f17;
+    width: 30px;
+    /* height: 40px; */
+    text-align: center;
+    padding: 6px 0;
+    cursor: pointer;
+  }
+  .shopping-cart span {
+    text-align: center;
+    font-weight: bolder;
+    color: #fff;
+  }
+  .shopping-cart img {
+    padding: 4px;
+    width: 24px;
+    height: 24px;
+  }
+  .socials-card {
+    margin-top: 14px;
+    padding: 6px 0;
+    width: 30px;
+    background-color: #666;
+    /* background-color: red; */
+    text-align: center;
+  }
+  .socials-card img {
+    padding: 4px;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+  }
+
+
