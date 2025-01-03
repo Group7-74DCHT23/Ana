@@ -89,6 +89,25 @@ if (isset($_GET['search'])) {
 }
 $sql = "SELECT * FROM hoadon WHERE id_bill LIKE '%$search%' OR fullname LIKE '%$search%'";
 $result = $conn->query($sql);
+
+
+// Số lượng người dùng hiển thị trên mỗi trang
+$limit = 3; 
+// Lấy số trang hiện tại từ URL (mặc định là 1)
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+// Tính vị trí bắt đầu
+$start = ($page - 1) * $limit;
+// Lấy tổng số bản ghi
+$total_result = $conn->query("SELECT COUNT(*) AS total FROM hoadon WHERE id_bill LIKE '%$search%' OR fullname LIKE '%$search%'");
+$total = $total_result->fetch_assoc()['total'];
+// Tính tổng số trang
+$total_pages = ceil($total / $limit);
+// Lấy dữ liệu cho trang hiện tại
+$sql = "SELECT * FROM hoadon 
+        WHERE id_bill LIKE '%$search%' OR fullname LIKE '%$search%'
+        LIMIT $start, $limit";
+$result = $conn->query($sql);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,21 +139,45 @@ $result = $conn->query($sql);
 </div>
 
 <div class="main-content">
-    <div class="quanlynguoidung">
+    <div class="quanlydonhang">
         <h1 class="mb-5 mt-2 text-center">QUẢN LÝ ĐƠN HÀNG</h1>
-
-        <div class="d-flex justify-content-between mb-3">
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addOrderModal">
-                <i class="bi bi-person-plus"></i> Thêm đơn hàng
-            </button>
-
-            <form method="GET" class="d-flex w-75 ms-3">
+        <div class="d-flex justify-content-center">
+            <form method="GET" class="d-flex justify-content-between w-75 mb-3">
                 <input type="text" name="search" class="form-control me-2 w-75" placeholder="Nhập mã hóa đơn hoặc tên khách hàng để tìm kiếm..." value="<?= htmlspecialchars($search) ?>">
                 <button type="submit" class="btn btn-secondary w-25">
                     <i class="bi bi-search"></i> Tìm kiếm
                 </button>
             </form>
         </div>
+
+        <div class="d-flex justify-content-between mb-3">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addOrderModal">
+                <i class="bi bi-person-plus"></i> Thêm đơn hàng
+            </button>
+
+            <div class="pagination">
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <?php if ($page > 1): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?search=<?= htmlspecialchars($search) ?>&page=<?= $page - 1 ?>">Trang trước</a>
+                        </li>
+                    <?php endif; ?>
+                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                        <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                            <a class="page-link" href="?search=<?= htmlspecialchars($search) ?>&page=<?= $i ?>"><?= $i ?></a>
+                        </li>
+                    <?php endfor; ?>
+                    <?php if ($page < $total_pages): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?search=<?= htmlspecialchars($search) ?>&page=<?= $page + 1 ?>">Trang sau</a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+            </div>
+        </div>
+        
 
         <table class="table table-bordered">
             <thead class="table-dark">
@@ -276,12 +319,12 @@ $result = $conn->query($sql);
                                 <input type="text" name="product_name" class="form-control" required>
                             </div>
                             <div class="mb-3">
-                                <label>Tổng tiền</label>
-                                <input type="number" name="total_bill" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
                                 <label>Số lượng</label>
                                 <input type="number" name="quantity" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Tổng tiền</label>
+                                <input type="number" name="total_bill" class="form-control" required>
                             </div>
                             <div class="mb-3">
                                 <label>SĐT</label>
