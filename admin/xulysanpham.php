@@ -135,6 +135,26 @@ if (isset($_GET['search'])) {
 }
 $sql = "SELECT * FROM sanpham WHERE name LIKE '%$search%'";
 $result = $conn->query($sql);
+
+// Số lượng sản phẩm hiển thị trên mỗi trang
+$limit = 10; 
+// Lấy số trang hiện tại từ URL (mặc định là 1)
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+// Tính vị trí bắt đầu
+$start = ($page - 1) * $limit;
+// Lấy từ khóa tìm kiếm từ người dùng (nếu có)
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+// Lấy tổng số bản ghi (sản phẩm) phù hợp với điều kiện tìm kiếm
+$total_result = $conn->query("SELECT COUNT(*) AS total FROM sanpham WHERE id LIKE '%$search%'");
+$total = $total_result->fetch_assoc()['total'];
+// Tính tổng số trang
+$total_pages = ceil($total / $limit);
+// Lấy dữ liệu sản phẩm cho trang hiện tại
+$sql = "SELECT * FROM sanpham 
+        WHERE id LIKE '%$search%'
+        LIMIT $start, $limit";
+$result = $conn->query($sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -167,20 +187,46 @@ $result = $conn->query($sql);
 </div>
 
 <div class="main-content">
-    <div class="quanlynguoidung">
+    <div class="quanlysanpham">
         <h1 class="mb-5 mt-2 text-center">QUẢN LÝ SẢN PHẨM</h1>
+        
+        <div class="d-flex justify-content-center">
+            <form method="GET" class="d-flex justify-content-between w-75 mb-3">
+                <input type="text" name="search" class="form-control me-2 w-75" placeholder="Nhập tên sản phẩm để tìm kiếm..." value="<?= htmlspecialchars($search) ?>">
+                <button type="submit" class="btn btn-secondary w-25">
+                    <i class="bi bi-search"></i> Tìm kiếm
+                </button>
+            </form>
+        </div>
+
 
         <div class="d-flex justify-content-between mb-3">
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">
                 <i class="bi bi-person-plus"></i> Thêm sản phẩm
             </button>
 
-            <form method="GET" class="d-flex w-75 ms-3">
-                <input type="text" name="search" class="form-control me-2 w-75" placeholder="Nhập tên sản phẩm để tìm kiếm..." value="<?= htmlspecialchars($search) ?>">
-                <button type="submit" class="btn btn-secondary w-25">
-                    <i class="bi bi-search"></i> Tìm kiếm
-                </button>
-            </form>
+            <div class="pagination">
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <?php if ($page > 1): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?search=<?= htmlspecialchars($search) ?>&page=<?= $page - 1 ?>">Trang trước</a>
+                        </li>
+                    <?php endif; ?>
+                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                        <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                            <a class="page-link" href="?search=<?= htmlspecialchars($search) ?>&page=<?= $i ?>"><?= $i ?></a>
+                        </li>
+                    <?php endfor; ?>
+                    <?php if ($page < $total_pages): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?search=<?= htmlspecialchars($search) ?>&page=<?= $page + 1 ?>">Trang sau</a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+            </div>
+
         </div>
 
         <table class="table table-bordered">
@@ -216,10 +262,9 @@ $result = $conn->query($sql);
                     <i class='bi bi-trash'></i> Xóa</a>
                     <a href="xulysanpham.php?id=<?= $row['id'] ?>&action=xoasoluong" class="btn btn-info mb-1" data-bs-toggle="modal" data-bs-target="#xoasoluongProductModal<?= $row['id'] ?>">
                     <i class='bi bi-list-check'></i> Cập nhật số lượng</a>
-
-
                  </td>
             </tr>
+                  
             <!-- Modal sửa sản phẩm -->
             <div class="modal fade" id="editProductModal<?= $row['id'] ?>" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -320,6 +365,7 @@ $result = $conn->query($sql);
     </div>
 </div>
 
+
 <!-- Modal thêm sản phẩm -->
 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -380,6 +426,7 @@ $result = $conn->query($sql);
         </div>
     </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
