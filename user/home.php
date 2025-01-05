@@ -53,32 +53,34 @@
                 <div class="men-shoe">
                     <img src="https://ananas.vn/wp-content/uploads/gi%C3%A0y-nam-e1720844745768.jpg" alt="Giày nam">
                     <div class="overlay"></div>
-                    <h4><a href="#">Giày nam</a></h4>
+                    <h4><a href="product-list.php?gender=Nam">Giày nam</a></h4>
                     <ul>
-                        <li><a href="#">New Arrivals</a></li>
-                        <li><a href="#">Best Seller</a></li>
-                        <li><a href="#">Sale-off</a></li>
+                        <li><a href="product-list.php">New Arrivals</a></li>
+                        <li><a href="product-list.php">Best Seller</a></li>
+                        <li><a href="saleoff.php">Sale-off</a></li>
                     </ul>
                 </div>
                 <div class="women-shoe">
                     <img src="https://ananas.vn/wp-content/uploads/DSC6813-3-copy-e1720844894780.jpg" alt="Giày nữ">
                     <div class="overlay"></div>
-                    <h4><a href="#">Giày nữ</a></h4>
+                    <h4><a href="product-list.php?gender=Nữ">Giày nữ</a></h4>
                     <ul>
-                        <li><a href="#">New Arrivals</a></li>
-                        <li><a href="#">Best Seller</a></li>
-                        <li><a href="#">Sale-off</a></li>
+                        <li><a href="product-list.php">New Arrivals</a></li>
+                        <li><a href="product-list.php">Best Seller</a></li>
+                        <li><a href="saleoff.php">Sale-off</a></li>
                     </ul>
                 </div>
                 <div class="brand-product">
                     <img src="https://ananas.vn/wp-content/uploads/312051553_3195731920685758_2796978630271241540_n-e1720845005261.jpg" alt="Dòng sản phẩm">
                     <div class="overlay"></div>
-                    <h4><a href="#">Dòng sản phẩm</a></h4>
+                    <h4><a href="product-list.php">Dòng sản phẩm</a></h4>
                     <ul>
-                        <li><a href="#">Basas</a></li>
-                        <li><a href="#">Vintas</a></li>
-                        <li><a href="#">Urbas</a></li>
-                        <li><a href="#">Pattas</a></li>
+                        <li><a href="product-list.php?family=Basas">Basas</a></li>
+                        <li><a href="product-list.php?family=Vintas">Vintas</a></li>
+                        <li><a href="product-list.php?family=Urbas">Urbas</a></li>
+                        <li><a href="product-list.php?family=Pattas">Pattas</a></li>
+                        <li><a href="product-list.php?family=Track6">Track 6</a></li>
+
                     </ul>
                 </div>
             </div>
