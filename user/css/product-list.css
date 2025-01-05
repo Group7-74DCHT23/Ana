@@ -1,0 +1,103 @@
+/* Container */
+.container {
+    font-family: "Nunito Sans", sans-serif;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Sidebar - Menu tùy chọn */
+.product-nav {
+    flex: 1;
+    padding: 20px;
+}
+
+.product-nav h3 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.category h4 {
+    font-size: 23px;
+    margin-bottom: 20px;
+    color: #f15e2c;
+    border-top: 1px dashed #f15e2c;
+    padding-top: 10px;
+
+}
+
+.category ul {
+    list-style: none;
+    padding: 0;
+}
+
+.category ul li {
+    margin-bottom: 10px;
+}
+
+.category ul li a {
+    text-decoration: none;
+    padding: 5px 10px;
+    display: block;
+}
+
+.category ul li a:hover {
+    background-color: #f15e2c;
+    color: white;
+}
+
+/* Product List */
+.product-list {
+    flex: 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+.product-item {
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.product-item .product-name a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.product-item .product-name a:hover {
+    color: #f15e2c;
+}
+
+.product-price {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.product-button {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #f15e2c;
+    color: white;
+    border-radius: 5px;
+    font-size: 1em;
+    display: inline-block;
+}
+
+.product-button:hover {
+    background-color: #e14c24;
+}
