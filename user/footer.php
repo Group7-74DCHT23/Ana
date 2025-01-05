@@ -10,9 +10,9 @@
                 <div class="col about-product">
                     <h4><a href="#">SẢN PHẨM</a></h4>
                     <ul>
-                        <li><a href="#">Giày Nam</a></li>
-                        <li><a href="#">Giày Nữ</a></li>
-                        <li><a href="#">Sale-off</a></li>
+                        <li><a href="product-list.php?gender=Nam">Giày Nam</a></li>
+                        <li><a href="product-list.php?gender=Nữ">Giày Nữ</a></li>
+                        <li><a href="saleoff.php">Sale-off</a></li>
                     </ul>
                 </div>
                 <div class="col about-company">
