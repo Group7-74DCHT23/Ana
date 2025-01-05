@@ -4,24 +4,22 @@ require ('connect.php');
 // Thêm người dùng
 if (isset($_POST['insert'])) {
     // Lấy dữ liệu từ form
-    $username = $_POST['username'];
-    $password = $_POST['password'];  
-    $fullname = $_POST['fullname'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
+    $password = $_POST['password']; 
+    $fullname = $_POST['fullname']; 
+    $emailorphone = $_POST['emailorphone'];
     $address = $_POST['address'];
 
     // Kiểm tra xem email đã tồn tại trong cơ sở dữ liệu chưa
-    $checkEmail = "SELECT * FROM nguoidung WHERE email = '$email'";
-    $result = $conn->query($checkEmail);
+    $checkEmailorPhone = "SELECT * FROM nguoidung WHERE email = '$emailorphone'";
+    $result = $conn->query($checkEmailorPhone);
 
     if ($result->num_rows > 0) {
         // Nếu email đã tồn tại, thông báo lỗi
         echo "<script>alert('Lỗi: Email này đã tồn tại.');</script>";
     } else {
         // Thực hiện câu lệnh SQL để thêm người dùng vào cơ sở dữ liệu
-        $sql = "INSERT INTO nguoidung (username, password, fullname, email, phone, address) 
-                VALUES ('$username', '$password', '$fullname', '$email', '$phone', '$address')";
+        $sql = "INSERT INTO nguoidung (password, fullname, emailorphone, address) 
+                VALUES ('$password', '$fullname', '$emailorphone', '$address')";
 
         if ($conn->query($sql) === TRUE) {
             echo "<script>
@@ -51,15 +49,14 @@ if (isset($_GET['delete'])) {
 // Xử lý cập nhật người dùng
 if (isset($_POST['update'])) {
     $id = $_POST['id'];
-    $username = $_POST['username'];
-    $fullname = $_POST['fullname'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
+    $fullname = $_POST['fullname']; 
+    $emailorphone = $_POST['emailorphone'];
     $address = $_POST['address'];
 
+
     $sql = "UPDATE nguoidung SET 
-            username = '$username', fullname = '$fullname', email = '$email',
-            phone = '$phone', address = '$address' 
+            fullname = '$fullname', emailorphone = '$emailorphone',
+            address = '$address' 
             WHERE id = $id";
     if ($conn->query($sql) === TRUE) {
         echo "<script>
@@ -73,7 +70,7 @@ if (isset($_POST['update'])) {
 
 // Xử lý tìm kiếm
 $search = $_GET['search'] ?? '';
-$sql = "SELECT * FROM nguoidung WHERE username LIKE '%$search%' OR fullname LIKE '%$search%'";
+$sql = "SELECT * FROM nguoidung WHERE emailorphone LIKE '%$search%' OR fullname LIKE '%$search%'";
 $result = $conn->query($sql);
 
 // Số lượng người dùng hiển thị trên mỗi trang
@@ -83,13 +80,13 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 // Tính vị trí bắt đầu
 $start = ($page - 1) * $limit;
 // Lấy tổng số bản ghi
-$total_result = $conn->query("SELECT COUNT(*) AS total FROM nguoidung WHERE username LIKE '%$search%' OR fullname LIKE '%$search%'");
+$total_result = $conn->query("SELECT COUNT(*) AS total FROM nguoidung WHERE emailorphone LIKE '%$search%' OR fullname LIKE '%$search%'");
 $total = $total_result->fetch_assoc()['total'];
 // Tính tổng số trang
 $total_pages = ceil($total / $limit);
 // Lấy dữ liệu cho trang hiện tại
 $sql = "SELECT * FROM nguoidung 
-        WHERE username LIKE '%$search%' OR fullname LIKE '%$search%' 
+        WHERE emailorphone LIKE '%$search%' OR fullname LIKE '%$search%' 
         LIMIT $start, $limit";
 $result = $conn->query($sql);
 
@@ -165,14 +162,12 @@ $result = $conn->query($sql);
     
 
         <!-- Bảng Người Dùng -->
-        <table class="table table-bordered">
-            <thead class="table-dark">
+        <table class="table table-bordered align-middle">
+            <thead class="table-dark align-middle">
                 <tr>
                     <th>ID</th>
-                    <th>Tên đăng nhập</th>
                     <th>Họ và tên</th>
-                    <th>Email</th>
-                    <th>Số điện thoại</th>
+                    <th>Email hoặc SĐT</th>
                     <th>Địa chỉ</th>
                     <th>Hành động</th>
                 </tr>
@@ -185,10 +180,8 @@ $result = $conn->query($sql);
     ?>
        <tr>
                 <td><?= $row['id'] ?></td>
-                <td><?= $row['username'] ?></td>
                 <td><?= $row['fullname'] ?></td>
-                <td><?= $row['email'] ?></td>
-                <td><?= $row['phone'] ?></td>
+                <td><?= $row['emailorphone'] ?></td>
                 <td><?= $row['address'] ?></td>
                 <td>
                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editUserModal<?= $row['id'] ?>"><i class='bi bi-pencil'></i> Sửa</button>
@@ -210,20 +203,12 @@ $result = $conn->query($sql);
                             <div class="modal-body">
                                 <input type="hidden" name="id" value="<?= $row['id'] ?>">
                                 <div class="mb-3">
-                                    <label for="username" class="form-label">Tên đăng nhập</label>
-                                    <input type="text" name="username" class="form-control" value="<?= $row['username'] ?>" required>
-                                </div>
-                                <div class="mb-3">
                                     <label for="fullname" class="form-label">Họ và tên</label>
                                     <input type="text" name="fullname" class="form-control" value="<?= $row['fullname'] ?>" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" name="email" class="form-control" value="<?= $row['email'] ?>" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="phone" class="form-label">Số điện thoại</label>
-                                    <input type="text" name="phone" class="form-control" value="<?= $row['phone'] ?>" required>
+                                    <label for="email" class="form-label">Email hoặc SĐT</label>
+                                    <input type="email" name="email" class="form-control" value="<?= $row['emailorphone'] ?>" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="address" class="form-label">Địa chỉ</label>
@@ -239,12 +224,9 @@ $result = $conn->query($sql);
                 </div>
     <?php
         endwhile;
-    } else {
-        echo "<script type='text/javascript'>
-                alert('Không tìm thấy người dùng');
-                window.location.href = 'xulynguoidung.php';  // Quay lại trang chủ
-            </script>";
-    }
+        } else {
+            echo "<tr><td colspan='10' class='text-center'>Không có người dùng nào</td></tr>";
+        }
     ?>
     </tbody>
 
@@ -262,10 +244,6 @@ $result = $conn->query($sql);
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="username" class="form-label">Tên đăng nhập</label>
-                        <input type="text" name="username" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
                         <label for="password" class="form-label">Mật khẩu</label>
                         <input type="password" name="password" class="form-control" required>
                     </div>
@@ -274,12 +252,8 @@ $result = $conn->query($sql);
                         <input type="text" name="fullname" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label">Email hoặc SĐT</label>
                         <input type="email" name="email" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Số điện thoại</label>
-                        <input type="text" name="phone" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Địa chỉ</label>
