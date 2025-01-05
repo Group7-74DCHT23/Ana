@@ -22,21 +22,21 @@
                 <img src="logo/Logo_Ananas.svg" alt="Logo Ananas">
             </a>
             <ul>
-                <li><a href="product.php">SẢN PHẨM</a>
+                <li><a href="product-list.php">SẢN PHẨM</a>
                     <div class="dropdown-product">
                         <div class="menu-product inner-wrap">
                             <div>
-                                <a href="product.php"><img src="https://ananas.vn/wp-content/uploads/Dropmenu_nam.png" alt=""></a>
-                                <a href="product.php">CHO NAM</a>
+                                <a href="product-list.php?gender=0,2"><img src="https://ananas.vn/wp-content/uploads/Dropmenu_nam.png" alt=""></a>
+                                <a href="product-list.php?gender=0,2">CHO NAM</a>
                             </div>
                             <div>
-                                <a href="product.php"><img src="https://ananas.vn/wp-content/uploads/Frame-1304-1.png" alt=""></a>
-                                <a href="product.php">CHO NỮ</a>
+                                <a href="product-list.php?gender=1,2"><img src="https://ananas.vn/wp-content/uploads/Frame-1304-1.png" alt=""></a>
+                                <a href="product-list.php?gender=1,2">CHO NỮ</a>
                             </div>
                             <div>
                                 <a href="saleoff.php"><img src="https://ananas.vn/wp-content/uploads/Group-1303-1.png"
                                         alt=""></a>
-                                <a href="saleoff.php">OUTLET</a>
+                                <a href="saleoff.php">OUTLET SALE</a>
                             </div>
                         </div>
                         <a href="#">MỌI NGƯỜI THƯỜNG GỌI CHÚNG TÔI LÀ <span>DỨA</span> !</a>
@@ -47,12 +47,13 @@
                 <li><a href="article.html"><img src="logo/DiscoverYOU.svg" alt=""></a></li>
             </ul>
             <div class="header-search">
-                <form>
+                <form action="product-list.php">
                     <div class="search-container">
-                        <img src="img/icon-search.png" alt="Search Icon" class="search-icon">
-                        <input type="text" id="search" placeholder="Tìm kiếm" required>
+                        <button type="submit" name="search" id="search"><img src="img/icon-search.png" alt="Search Icon" class="search-icon"></button>
+                        <input type="text" id="noidung" name="noidung" placeholder="Tìm kiếm" required>
                     </div>
                 </form>
+            
                 <div class="header-search_user">
                     <a href="login.php">
                         <i class="fas fa-user"></i>
