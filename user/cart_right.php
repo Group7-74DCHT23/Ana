@@ -1,6 +1,5 @@
 <div id="cards">
         <div class="shopping-cart">
-            <span>0</span>
             <img src="https://ananas.vn/wp-content/themes/ananas/fe-assets/images/svg/icon_gio_hang.svg" alt="">
         </div>
         <ul class="socials-card">
